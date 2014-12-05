@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>PHL radio</title>
+
+    <link rel="stylesheet" href="css/reset.css" media="screen, all">
+    <link rel="stylesheet" href="css/style.css" media="screen, all">
+
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+    <script src="js/script.js"></script>
+
+</head>
+<body>
+    <div class="global-radio">
+        <div class="case">
+            <div class="inner-case">
+                <div class="front-case">
+                    <div class="panel">
+
+                        <!-- power -->
+                        <div class="power">
+                            <span class="on-off active">
+                                <a href="#" title="on / off"><span>on / off</span></a>
+                            </span>
+                        </div>
+                        <!-- /power -->
+
+                        <!-- tuner -->
+                        <div class="tuner">
+                            <span class="controller"><span></span></span>
+                            <span class="controllerCont"></span>
+                            <div></div>
+                        </div>
+                        <!-- /tuner -->
+
+                        <!-- retina -->
+                        <div class="retina">
+                            <!-- live -->
+                            <span class="live">Live</span>
+                            <!--  progress -->
+                            <div class="progress">
+                                <div class="pointer"><span></span></div>
+                            </div>
+                            <!-- stereo -->
+                            <span class="stereo">stereo</span>
+                        </div>
+                        <!--  / retina -->
+
+                        <!-- volume -->
+                        <div class="volume">
+                            <span class="controller"><span></span></span>
+                            <span class="controllerCont"></span>
+                            <div></div>
+                            <span class="label">- +</span>
+                        </div>
+                        <!-- /volume -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="audio_containner"></div>
+
+    <audio id="audio_chiado">
+        <source src="audio/chiado.mp3" type="audio/mpeg">
+        <source src="audio/chiado.ogg" type="audio/ogg">
+    </audio>
+
+</body>
+</html>
