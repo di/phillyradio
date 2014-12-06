@@ -1,7 +1,7 @@
 Philly Radio
 ============
 
-Pure-CSS3/JS HTML5 old-timey radio FM-dial jawn.
+CSS3/JS HTML5 old-timey radio FM-dial jawn.
 
 Coming at you live and direct: [http://phillyradio.herokuapp.com/](http://phillyradio.herokuapp.com/)
 
