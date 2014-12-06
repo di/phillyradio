@@ -59,7 +59,6 @@ html {
 .speaker {
   height:250px;
   background-image: url('../img/weave.jpg');
-  background-size: 512px;
 }
 .front-case {
   height: auto;
