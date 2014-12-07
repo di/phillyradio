@@ -1,5 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lobster);
-@import url(http://fonts.googleapis.com/css?family=Limelight);
+@import url(http://fonts.googleapis.com/css?family=Lobster|Limelight|Wire+One);
 * {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -210,6 +209,23 @@ html {
   background: #c10d16;
   box-shadow: 0 0 10px 3px #c10d16;
 }
+.frequencies {
+  position: absolute;
+  top: -24px;
+  left: -11px;
+  width: 400px;
+  text-align:left;
+}
+.frequencies > div {
+  display: block;
+  float: left;
+  color: rgba(255, 255, 255, .3);
+  font-size: 20px;
+  letter-spacing: 1px;
+font-family: 'Wire One', sans-serif;
+  text-align: center;
+  width:25px;
+}
 .stereo {
   opacity: .9;
   position: absolute;
@@ -224,8 +240,8 @@ html {
 }
 .progress {
   position: absolute;
-  top:30px;
-  left:110px;
+  top:40px;
+  left:130px;
   width:230px;
   opacity: .6;
   height: 12px;
@@ -236,15 +252,15 @@ html {
   -webkit-linear-gradient(left, rgba(255,255,255,1) 1px, transparent 1px),
   -webkit-linear-gradient(left, rgba(255,255,255,.3) 1px, transparent 1px);
   background-image:
-  linear-gradient(to right, rgba(255,255,255,1) 1px, transparent 1px),
+  linear-gradient(to right, rgba(130,130,130,1) 1px, transparent 1px),
   linear-gradient(to right, rgba(255,255,255,.3) 1px, transparent 1px);
-  background-size:24px 50px, 5px 5px;
+  background-size:25px 50px, 5px 5px;
   background-position:0 bottom;
   background-repeat: repeat-x;
 }
 .pointer {
   position:absolute;
-  top:-40px;
+  top:-50px;
   left:0;
   width:2px;
   height: 80px;
