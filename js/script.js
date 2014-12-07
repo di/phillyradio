@@ -241,7 +241,7 @@ YUI().use(['node'], function (Y) {
 
         stations = ['http://129.25.22.28:8000/listen',
                     'http://wxpnhi.streamguys.com/xpnhi',
-                    'audio/chiado.mp3',
+                    'http://pubint.ic.llnwd.net/stream/pubint_wrti2',
                     'audio/chiado.mp3',
                     'audio/chiado.mp3',
                     'audio/chiado.mp3',

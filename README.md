@@ -8,6 +8,7 @@ Coming at you live and direct: [http://phillyradio.herokuapp.com/](http://philly
 ## Currently supports:
 * 88.5 WXPN [http://wxpn.org/](http://wxpn.org/)
 * 91.7 WKDU [http://wkdu.org/](http://wkdu.org/)
+* 90.1 WRTI [http://wrti.org/](http://wrti.org/)
 * ...and lots of static.
 
 Muito obrigado a [@bernarddeluna](https://github.com/bernarddeluna) para o radio!
