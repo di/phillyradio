@@ -22,8 +22,9 @@ YUI().use(['node'], function (Y) {
 
         numChannels = 10,
         displayWidth = 230,
-        channel = 0,
-        audios = [],
+        channel = 88.0,
+        audios = {},
+        volume = {},
 
         pointer = Y.one(".pointer"),
         pointerPosInicial = 0,
@@ -39,7 +40,6 @@ YUI().use(['node'], function (Y) {
         volumeAnguloInicial = null,
 
         // blockMove = 0,
-        wavePos = (Math.cos (((0 * (numChannels - 1) * 2) / displayWidth) * Math.PI) * 0.5 + 0.5),
         playing = false;
 
     bind = function() {
@@ -50,17 +50,14 @@ YUI().use(['node'], function (Y) {
 
         if (playing) {
           playing = false;
-          //audios[channel].pause();
-          audios[channel].volume = 0;
+          setVolume(0);
           Y.one(".case").removeClass('on');
         } else {
           playing = true;
-          //audios[channel].play();
-          audios[channel].volume = volumeAudio * wavePos;
+          setVolume(volumeAudio);
           Y.one(".case").addClass('on');
         }
 
-        //audios[channel].currentTime = 0;
         setVolume(volumeAudio);
 
       });
@@ -192,45 +189,29 @@ YUI().use(['node'], function (Y) {
           Y.one(tunerRotElement).setStyle("transform", "rotate(" + anguloAtual + "deg)");
 
           // calcula canal e ruido
-          var newChannel = Math.round( (pointerPosInicial * (numChannels - 1)) / displayWidth) ;
+          var newChannel = (88 + 2*(pointerPosInicial * 9)/ displayWidth).toFixed(1);
 
           if (newChannel != channel) {
-
-            audios[channel].volume = 0;
-            //audios[channel].pause();
-            //audios[channel].currentTime = 0;
-
             channel = newChannel;
-
-            if (playing) {
-              //audios[channel].play();
-              audios[channel].volume = volumeAudio * wavePos;
-            }
-
+            setVolume(volumeAudio);
           }
-
-          wavePos = (Math.cos( ((pointerPosInicial * (numChannels - 1) * 2) / displayWidth) * Math.PI ) * 0.5 + 0.5);
-          setVolume(volumeAudio);
-
         }
-
       });
-
     },
 
     setVolume = function(vol){
-
-      var volBase = (1 - wavePos) - 0.1;
-
-      if (volBase < 0) {
-        volBase = 0;
-      }
-
       if (playing) {
-        audioChiado.volume = volBase * 0.7 * vol;
-        audios[channel].volume = wavePos * vol;
+        if (channel in volume) {
+            audioChiado.volume = (1 - volume[channel]) * vol;
+            audios[channel].volume = volume[channel] * vol;
+        } else {
+            audioChiado.volume = vol;
+        }
       } else {
         audioChiado.volume = 0;
+        if (channel in audios) {
+            audios[channel].volume = 0;
+        }
       }
 
     }
@@ -239,26 +220,23 @@ YUI().use(['node'], function (Y) {
 
       init: function() {
 
-        stations = ['http://129.25.22.28:8000/listen',
-                    'http://wxpnhi.streamguys.com/xpnhi',
-                    'http://pubint.ic.llnwd.net/stream/pubint_wrti2',
-                    'audio/chiado.mp3',
-                    'audio/chiado.mp3',
-                    'audio/chiado.mp3',
-                    'audio/chiado.mp3',
-                    'audio/chiado.mp3',
-                    'audio/chiado.mp3',
-                    'audio/chiado.mp3'
+        stations = [{freq:91.7, url:'http://129.25.22.28:8000/listen'},
+                    {freq:88.5, url:'http://wxpnhi.streamguys.com/xpnhi'},
+                    {freq:90.1, url:'http://pubint.ic.llnwd.net/stream/pubint_wrti2'}
         ]
         for (var i=0; i < stations.length; i++) {
+          var station = stations[i]
           var newAudio = document.createElement('audio');
           newAudio.setAttribute('preload', 'auto');
-          newAudio.innerHTML = '<source src="' + stations[i] + '" type="audio/mpeg">';
+          newAudio.innerHTML = '<source src="' + station.url + '" type="audio/mpeg">';
           audioContainner.appendChild(newAudio);
           newAudio.volume = 0;
           newAudio.play();
-          audios.push(newAudio);
-          //newAudio.addEventListener("ended", function(e){ e.target.play(); }, false);
+          audios[station.freq] = newAudio;
+          for (var j = -0.5; j <= 0.5; j+=0.1){
+            audios[(station.freq + j).toFixed(1)] = newAudio;
+            volume[(station.freq + j).toFixed(1)] = 1*(1-Math.abs(j+j)).toFixed(1);
+          }
         }
 
         audioChiado = document.getElementById("audio_chiado");
