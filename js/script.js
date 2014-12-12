@@ -44,23 +44,9 @@ YUI().use(['node'], function (Y) {
 
     bind = function() {
 
-      Y.one(".on-off").on('click', function(e) {
+      Y.one(".on-off").on('click', onOff);
 
-        e.preventDefault();
-
-        if (playing) {
-          playing = false;
-          setVolume(0);
-          Y.one(".case").removeClass('on');
-        } else {
-          playing = true;
-          setVolume(volumeAudio);
-          Y.one(".case").addClass('on');
-        }
-
-        setVolume(volumeAudio);
-
-      });
+      Y.one('doc').on('keydown', function(e) { if (e.keyCode == 32) onOff(e);});
 
       Y.one(".global-radio").on('mouseup', function(e) {
         volumeDown = false;
@@ -197,7 +183,7 @@ YUI().use(['node'], function (Y) {
           }
         }
       });
-    },
+    };
 
     setVolume = function(vol){
       if (playing) {
@@ -213,8 +199,21 @@ YUI().use(['node'], function (Y) {
             audios[channel].volume = 0;
         }
       }
+    };
 
-    }
+    onOff = function(e) {
+        e.preventDefault();
+        if (playing) {
+          playing = false;
+          setVolume(0);
+          Y.one(".case").removeClass('on');
+        } else {
+          playing = true;
+          setVolume(volumeAudio);
+          Y.one(".case").addClass('on');
+        }
+        setVolume(volumeAudio);
+    };
 
     return {
 
@@ -249,7 +248,6 @@ YUI().use(['node'], function (Y) {
         audioChiado.play();
         bind();
       }
-
     };
   };
 
